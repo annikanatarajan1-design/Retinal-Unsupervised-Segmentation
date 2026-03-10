@@ -3,4 +3,9 @@ __pycache__/
 *.pth
 .ipynb_checkpoints
 .env
+
+# Ignore dataset images
 data/images/*
+
+# But keep README
+!data/images/README.md
