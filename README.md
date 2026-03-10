@@ -2,100 +2,90 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-DeepLearning-orange)
 ![Status](https://img.shields.io/badge/Project-Completed-green)
 
-# Retinal Blood Vessel Segmentation using Unsupervised Deep Learning
+# Retinal Layer Segmentation in OCT Images using Unsupervised Deep Learning
 
-Deep learning pipeline for **retinal blood vessel segmentation** using an **unsupervised autoencoder-based approach**.
-The system learns structural patterns of retinal images and extracts vascular structures without requiring manual annotations.
+Deep learning pipeline for **retinal layer segmentation in Optical Coherence Tomography (OCT) images** using an **unsupervised autoencoder-based approach**.
 
-This project demonstrates a full medical image segmentation workflow including **data preprocessing, model training, clustering-based segmentation, and post-processing**.
+The system learns structural patterns from OCT scans and segments retinal layers **without requiring manual annotations**.
 
-Unsupervised deep learning approach for retinal vessel segmentation using autoencoder feature learning and clustering.
+This project demonstrates a full **medical image segmentation workflow** including:
+
+* data preprocessing
+* deep representation learning
+* clustering-based segmentation
+* visualization of retinal layers
 
 ---
 
-## Project Overview
+# Project Overview
 
 ![Pipeline Overview](docs/pipeline_overview.png)
 
 ```mermaid
 flowchart LR
 
-A[Retinal Fundus Image] --> B[Image Preprocessing]
+A[OCT Image] --> B[Image Preprocessing]
 
 B --> C[Convolutional Autoencoder]
 
 C --> D[Latent Feature Representation]
 
-D --> E[K-Means Clustering]
+D --> E[HDBSCAN Clustering]
 
-E --> F[Vessel Pixel Identification]
+E --> F[Layer Pixel Identification]
 
 F --> G[Segmentation Mask Reconstruction]
 
-G --> H[Final Retinal Vessel Segmentation]
+G --> H[Final Retinal Layer Segmentation]
+```
 
 ---
 
-## Research Motivation
+# Research Motivation
 
-Retinal vessel segmentation is a critical step in automated diagnosis of ophthalmic diseases such as diabetic retinopathy and glaucoma.
+Retinal layer analysis is an important step in diagnosing ophthalmic diseases such as:
 
-Manual annotation of retinal vessels is expensive and time-consuming. This project explores an unsupervised approach using deep learning representations to automatically extract vascular structures.
+* Diabetic Retinopathy
+* Glaucoma
+* Age-related Macular Degeneration
 
-## Project Highlights
+Manual annotation of retinal layers in OCT scans is **expensive and time-consuming**.
 
-- Unsupervised retinal vessel segmentation
-- Autoencoder-based feature learning
-- K-Means clustering for vessel extraction
-- Post-processing to refine vascular structures
-- Implemented in **PyTorch**
+This project explores an **unsupervised deep learning approach** that learns structural representations from OCT images and automatically segments retinal layers **without requiring labeled data**.
 
 ---
 
-## Example Result
+# Project Highlights
 
-| Input Retina Image             | Segmented Vessels                     |
+* Fully **unsupervised retinal layer segmentation**
+* **Convolutional autoencoder** for feature learning
+* **HDBSCAN clustering** for structure extraction
+* Visualization of segmented retinal layers
+* Implemented using **PyTorch**
+
+---
+
+# Example Result
+
+| Input OCT Image                | Segmented Retinal Layers              |
 | ------------------------------ | ------------------------------------- |
 | ![](outputs/input_example.png) | ![](outputs/retinal_segmentation.png) |
 
 ---
 
-## Project Pipeline
+# Project Pipeline
 
-1. Retina Image Acquisition
+1. OCT Image Acquisition
 2. Image Preprocessing
 3. Autoencoder Feature Learning
-4. Feature Extraction
-5. K-Means Clustering
-6. Vessel Mask Reconstruction
-7. Post-processing
-
-## Segmentation Pipeline
-
-```mermaid
-flowchart LR
-
-A[Retinal Image] --> B[Preprocessing]
-
-B --> C[Autoencoder Encoder]
-
-C --> D[Latent Feature Representation]
-
-D --> E[K-Means Clustering]
-
-E --> F[Vessel Pixel Identification]
-
-F --> G[Segmentation Mask Reconstruction]
-
-G --> H[Post Processing]
-
-H --> I[Final Vessel Segmentation]
-```
-
+4. Latent Feature Extraction
+5. HDBSCAN Clustering
+6. Segmentation Mask Reconstruction
+7. Visualization of Retinal Layers
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```
 Retinal-Unsupervised-Segmentation
@@ -107,7 +97,11 @@ Retinal-Unsupervised-Segmentation
 │   └── best_autoencoder.pth
 │
 ├── outputs
+│   ├── input_example.png
 │   └── retinal_segmentation.png
+│
+├── docs
+│   └── pipeline_overview.png
 │
 ├── src
 │   ├── dataset.py
@@ -122,13 +116,13 @@ Retinal-Unsupervised-Segmentation
 
 ---
 
-## Installation
+# Installation
 
 Clone the repository:
 
 ```
-git clone https://github.com/annikanatarajan1-design/retinal-unsupervised-segmentation.git
-cd retinal-unsupervised-segmentation
+git clone https://github.com/annikanatarajan1-design/Retinal-Unsupervised-Segmentation.git
+cd Retinal-Unsupervised-Segmentation
 ```
 
 Install dependencies:
@@ -139,33 +133,39 @@ pip install -r requirements.txt
 
 ---
 
-## Quick Start
+# Quick Start
 
-Run the full segmentation pipeline:
+Run the segmentation pipeline:
 
+```
 python main.py
+```
 
 ---
 
+# Data Source
 
-## Data Source
+Retinal OCT images used in this project were obtained from a **university laboratory dataset**.
 
-Retinal images used in this project were obtained from a university laboratory dataset.
+Due to dataset usage restrictions, the full dataset cannot be publicly distributed in this repository.
 
-The dataset is used for research and educational purposes. Due to usage restrictions, the full dataset is not publicly distributed in this repository.
+Dataset details:
 
-Total images: 256  
-Image format: PNG  
-Average size: ~260 KB
+* Total images: **256**
+* Image format: **PNG**
+* Average image size: **~260 KB**
 
-Due to dataset usage restrictions, the full dataset is not included in this repository.
-A small sample is provided in `data/images/NORMAL*.png`.
+A small sample is included in:
 
-Users can replace the images in `data/images` with their own retinal datasets.
+```
+data/images/
+```
+
+Users may replace the images in this directory with their own OCT datasets.
 
 ---
 
-## Running the Project
+# Running the Project
 
 Train the autoencoder:
 
@@ -181,70 +181,73 @@ python main.py
 
 ---
 
-## Model
+# Model
 
-The segmentation model is based on a **convolutional autoencoder** which learns compressed feature representations of retinal structures.
+The segmentation system is based on a **Convolutional Autoencoder** that learns compressed feature representations of OCT images.
 
 Architecture components:
 
-* Encoder – extracts structural features
-* Latent space – compressed representation
-* Decoder – reconstructs retinal structures
+* **Encoder** – extracts structural retinal features
+* **Latent space** – compressed feature representation
+* **Decoder** – reconstructs retinal structure
 
-Features extracted from the latent representation are clustered using **K-Means** to separate vessel pixels from background.
-
----
-
-## Results
-
-The model successfully extracts **fine retinal vascular structures**, including thin vessels, without requiring labeled segmentation masks.
-
-Advantages of the method:
-
-- No manual annotation required
-- Works with limited data
-- Preserves vascular topology
+Latent representations are clustered using **HDBSCAN** to identify distinct retinal layers.
 
 ---
 
-## Limitations
+# Results
 
-- Performance may vary across datasets
-- Very thin vessels may be missed
-- Model sensitive to image quality
+The model successfully extracts **retinal layer structures** from OCT images without requiring segmentation labels.
 
----
+Key advantages:
 
-## Future Improvements
-
-- U-Net based segmentation
-- Self-supervised representation learning
-- Multi-scale vessel detection
-- Quantitative evaluation (Dice, IoU)
+* No manual annotation required
+* Works with relatively small datasets
+* Captures structural retinal information
 
 ---
 
-## Technologies Used
+# Limitations
 
-- Python
-- PyTorch
-- OpenCV
-- NumPy
-- Scikit-Learn
+* Performance may vary across OCT datasets
+* Some thin retinal layers may be difficult to separate
+* Model sensitive to OCT image quality
 
 ---
 
-## Citation
+# Future Improvements
+
+Possible extensions include:
+
+* U-Net based segmentation
+* Self-supervised representation learning
+* Multi-scale retinal feature extraction
+* Quantitative evaluation using **Dice score / IoU**
+
+---
+
+# Technologies Used
+
+* Python
+* PyTorch
+* OpenCV
+* NumPy
+* Scikit-Learn
+* HDBSCAN
+
+---
+
+# Citation
 
 If you use this repository in research or projects, please cite:
 
-Annika Natarajan (2026)  
-**Unsupervised Retinal Vessel Segmentation using Deep Learning**.  
+Annika Natarajan (2026)
+**Unsupervised Retinal Layer Segmentation using Deep Learning**
 GitHub Repository.
 
 ---
 
-## Author
+# Author
 
-Annika Natarajan  
-Machine Learning / Computer Vision Projects
+**Annika Natarajan**
+Machine Learning • Computer Vision • Medical Imaging
