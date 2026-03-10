@@ -10,6 +10,8 @@ Due to usage restrictions, the full dataset cannot be publicly distributed in th
 - Format: PNG
 - Average image size: ~260 KB
 
+```markdown
+
 ## Expected Folder Structure
 
 Place the images inside:
